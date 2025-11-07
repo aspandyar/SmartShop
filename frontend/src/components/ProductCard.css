@@ -28,3 +28,24 @@
   filter: brightness(1.1);
 }
 
+.product-card__category {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.product-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.product-card__tags .tag {
+  background: #e5e7eb;
+  color: #374151;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+

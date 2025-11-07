@@ -1,39 +1,78 @@
-import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './features/auth/AuthContext';
+import { Layout } from './components/Layout';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import DashboardPage from './pages/DashboardPage';
+import ProductsPage from './pages/ProductsPage';
+import AdminProductsPage from './pages/admin/AdminProductsPage';
+import AdminUsersPage from './pages/admin/AdminUsersPage';
+import AdminInteractionTypesPage from './pages/admin/AdminInteractionTypesPage';
 import './styles/variables.css';
 import './App.css';
-import './pages/HomePage.css';
-import { MainLayout } from './layouts/MainLayout';
-import { HomePage } from './pages/HomePage';
-import { SearchBar } from './features/search/SearchBar';
-import { useAuth } from './hooks/useAuth';
 
 function App() {
-  const { user } = useAuth();
-  const [query, setQuery] = useState('');
-
-  function handleSearch(term) {
-    setQuery(term);
-  }
-
-  const header = (
-    <div className="app-header">
-      <div>
-        <h1>SmartShop Recommender</h1>
-        <p className="app-header__subtitle">
-          Discover products you&apos;ll love with personalized recommendations.
-        </p>
-      </div>
-      <div className="app-header__actions">
-        <SearchBar onSearch={handleSearch} />
-        <span className="app-header__user">Signed in as {user?.name || 'Guest'}</span>
-      </div>
-    </div>
-  );
-
   return (
-    <MainLayout header={header}>
-      <HomePage query={query} />
-    </MainLayout>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <DashboardPage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/products"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <ProductsPage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/products"
+            element={
+              <ProtectedRoute requireAdmin>
+                <Layout>
+                  <AdminProductsPage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedRoute requireAdmin>
+                <Layout>
+                  <AdminUsersPage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/interaction-types"
+            element={
+              <ProtectedRoute requireAdmin>
+                <Layout>
+                  <AdminInteractionTypesPage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
