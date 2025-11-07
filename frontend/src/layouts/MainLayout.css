@@ -1,0 +1,17 @@
+.main-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: var(--background, #f8fafc);
+}
+
+.main-layout__header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  background: #ffffff;
+}
+
+.main-layout__content {
+  padding: 2rem clamp(1rem, 5vw, 4rem);
+}
+
