@@ -1,0 +1,22 @@
+services:
+  redis:
+    image: redis:latest
+    container_name: redis-server
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - backend
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo-server
+    ports:
+      - "27017:27017"
+    restart: always
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
