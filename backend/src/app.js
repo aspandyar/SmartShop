@@ -2,6 +2,9 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const productRoutes = require('./routes/productRoutes');
+const userRoutes = require('./routes/users');
+const interactionRoutes = require('./routes/interactions');
+const recommendationRoutes = require('./routes/recommendations');
 
 const app = express();
 
@@ -14,11 +17,14 @@ app.get('/health', (req, res) => {
 });
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/interactions', interactionRoutes);
+app.use('/api/recommendations', recommendationRoutes);
 
 app.use((err, req, res, next) => {
-  const status = err.status || 500;
-  res.status(status).json({ message: err.message || 'Unexpected error' });
-  next(err);
+  const { handleMongooseError } = require('./utils/errorHandler');
+  const errorInfo = handleMongooseError(err);
+  res.status(errorInfo.status).json({ message: errorInfo.message, errors: errorInfo.errors });
 });
 
 module.exports = app;

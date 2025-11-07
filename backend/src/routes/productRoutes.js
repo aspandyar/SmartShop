@@ -1,9 +1,13 @@
 const router = require('express').Router();
-const { listProducts, recommendProducts } = require('../controllers/productController');
-const { requireAuth } = require('../middleware/authMiddleware');
+const {
+  listProducts,
+  searchProductsEndpoint,
+  createProductEndpoint,
+} = require('../controllers/productController');
 
 router.get('/', listProducts);
-router.get('/:userId/recommendations', requireAuth, recommendProducts);
+router.get('/search', searchProductsEndpoint);
+router.post('/', createProductEndpoint);
 
 module.exports = router;
 
