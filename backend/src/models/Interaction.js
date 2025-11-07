@@ -4,7 +4,7 @@ const interactionSchema = new mongoose.Schema(
   {
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
-    type: { type: String, enum: ['view', 'like', 'purchase'], required: true },
+    type: { type: String, required: true }, // Will reference InteractionType name
     timestamp: { type: Date, default: Date.now },
   },
   { timestamps: false },

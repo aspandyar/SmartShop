@@ -1,4 +1,10 @@
-const { getAllUsers, getUserById, createUser } = require('../models/User');
+const {
+  getAllUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+} = require('../models/User');
 const { handleMongooseError, isValidObjectId } = require('../utils/errorHandler');
 
 async function listUsers(req, res, next) {
@@ -63,12 +69,89 @@ async function createUserEndpoint(req, res, next) {
     }
 
     const user = await createUser({ username, email, passwordHash, age, gender, preferences });
-    res.status(201).json({ user });
+    const userResponse = { ...user };
+    delete userResponse.passwordHash;
+    res.status(201).json({ user: userResponse });
   } catch (error) {
     const errorInfo = handleMongooseError(error);
     return res.status(errorInfo.status).json({ message: errorInfo.message, errors: errorInfo.errors });
   }
 }
 
-module.exports = { listUsers, getUser, createUserEndpoint };
+async function updateUserEndpoint(req, res, next) {
+  try {
+    if (!req.body) {
+      return res.status(400).json({ message: 'Request body is required' });
+    }
+
+    const { id } = req.params;
+
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({ message: 'Invalid user ID format' });
+    }
+
+    const { username, email, age, gender, preferences, role } = req.body;
+
+    if (email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ message: 'Invalid email format' });
+      }
+    }
+
+    if (age !== undefined && (typeof age !== 'number' || age < 0 || age > 150)) {
+      return res.status(400).json({ message: 'Age must be a number between 0 and 150' });
+    }
+
+    if (preferences !== undefined && !Array.isArray(preferences)) {
+      return res.status(400).json({ message: 'Preferences must be an array' });
+    }
+
+    if (role && !['user', 'admin'].includes(role)) {
+      return res.status(400).json({ message: 'Role must be either "user" or "admin"' });
+    }
+
+    const user = await updateUser(id, { username, email, age, gender, preferences, role });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const userResponse = { ...user };
+    delete userResponse.passwordHash;
+    res.json({ user: userResponse });
+  } catch (error) {
+    const errorInfo = handleMongooseError(error);
+    return res.status(errorInfo.status).json({ message: errorInfo.message, errors: errorInfo.errors });
+  }
+}
+
+async function deleteUserEndpoint(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({ message: 'Invalid user ID format' });
+    }
+
+    const user = await deleteUser(id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const userResponse = { ...user };
+    delete userResponse.passwordHash;
+    res.json({ message: 'User deleted successfully', user: userResponse });
+  } catch (error) {
+    const errorInfo = handleMongooseError(error);
+    return res.status(errorInfo.status).json({ message: errorInfo.message });
+  }
+}
+
+module.exports = {
+  listUsers,
+  getUser,
+  createUserEndpoint,
+  updateUserEndpoint,
+  deleteUserEndpoint,
+};
 

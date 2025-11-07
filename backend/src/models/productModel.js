@@ -28,5 +28,25 @@ async function createProduct(data) {
   return product.save();
 }
 
-module.exports = { Product, getProducts, searchProducts, createProduct };
+async function getProductById(id) {
+  return Product.findById(id).lean();
+}
+
+async function updateProduct(id, data) {
+  return Product.findByIdAndUpdate(id, data, { new: true, runValidators: true }).lean();
+}
+
+async function deleteProduct(id) {
+  return Product.findByIdAndDelete(id).lean();
+}
+
+module.exports = {
+  Product,
+  getProducts,
+  searchProducts,
+  createProduct,
+  getProductById,
+  updateProduct,
+  deleteProduct,
+};
 

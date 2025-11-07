@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema(
     username: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     passwordHash: { type: String, required: true },
+    role: { type: String, enum: ['user', 'admin'], default: 'user' },
     age: Number,
     gender: String,
     preferences: [String],
@@ -27,5 +28,25 @@ async function createUser(data) {
   return user.save();
 }
 
-module.exports = { User, getAllUsers, getUserById, createUser };
+async function updateUser(id, data) {
+  return User.findByIdAndUpdate(id, data, { new: true, runValidators: true }).lean();
+}
+
+async function deleteUser(id) {
+  return User.findByIdAndDelete(id).lean();
+}
+
+async function getUserByEmail(email) {
+  return User.findOne({ email: email.toLowerCase() }).lean();
+}
+
+module.exports = {
+  User,
+  getAllUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+  getUserByEmail,
+};
 

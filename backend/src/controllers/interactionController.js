@@ -1,6 +1,7 @@
 const { logInteraction, getUserInteractions } = require('../models/Interaction');
 const { User } = require('../models/User');
 const { Product } = require('../models/productModel');
+const { getTypeByName } = require('../models/InteractionType');
 const { handleMongooseError, isValidObjectId } = require('../utils/errorHandler');
 
 async function createInteraction(req, res, next) {
@@ -31,9 +32,10 @@ async function createInteraction(req, res, next) {
       return res.status(400).json({ message: 'Interaction type is required' });
     }
 
-    const validTypes = ['view', 'like', 'purchase'];
-    if (!validTypes.includes(type)) {
-      return res.status(400).json({ message: `Type must be one of: ${validTypes.join(', ')}` });
+    // Check if interaction type exists
+    const interactionType = await getTypeByName(type);
+    if (!interactionType) {
+      return res.status(404).json({ message: `Interaction type '${type}' not found. Please create it first.` });
     }
 
     // Check if user exists
@@ -48,7 +50,7 @@ async function createInteraction(req, res, next) {
       return res.status(404).json({ message: 'Product not found' });
     }
 
-    const interaction = await logInteraction({ userId, productId, type });
+    const interaction = await logInteraction({ userId, productId, type: interactionType.name });
     res.status(201).json({ interaction });
   } catch (error) {
     const errorInfo = handleMongooseError(error);
