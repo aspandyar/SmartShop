@@ -1,6 +1,11 @@
-const router = require('express').Router();
-const { register, login, logout, getCurrentUser } = require('../controllers/authController');
-const { requireAuth } = require('../middleware/authMiddleware');
+const router = require("express").Router();
+const {
+  register,
+  login,
+  logout,
+  getCurrentUser,
+} = require("../controllers/authController");
+const { requireAuth } = require("../middleware/authMiddleware");
 
 /**
  * @swagger
@@ -64,7 +69,7 @@ const { requireAuth } = require('../middleware/authMiddleware');
  *       409:
  *         description: User already exists
  */
-router.post('/register', register);
+router.post("/register", register);
 
 /**
  * @swagger
@@ -106,7 +111,7 @@ router.post('/register', register);
  *       401:
  *         description: Invalid credentials
  */
-router.post('/login', login);
+router.post("/login", login);
 
 /**
  * @swagger
@@ -120,7 +125,7 @@ router.post('/login', login);
  *       200:
  *         description: Logout successful
  */
-router.post('/logout', requireAuth, logout);
+router.post("/logout", requireAuth, logout);
 
 /**
  * @swagger
@@ -143,7 +148,6 @@ router.post('/logout', requireAuth, logout);
  *       401:
  *         description: Unauthorized
  */
-router.get('/me', requireAuth, getCurrentUser);
+router.get("/me", requireAuth, getCurrentUser);
 
 module.exports = router;
-
