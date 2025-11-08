@@ -31,7 +31,10 @@ export function Layout({ children }) {
                   </>
                 )}
                 <div className="user-menu">
-                  <span className="user-name">{user.username}</span>
+                  <Link to="/profile" className="user-profile-link">
+                    <span className="user-icon">👤</span>
+                    <span className="user-name">{user.username}</span>
+                  </Link>
                   <span className="user-role">({user.role})</span>
                   <button onClick={handleLogout} className="btn-logout">
                     Logout
@@ -46,4 +49,3 @@ export function Layout({ children }) {
     </div>
   );
 }
-

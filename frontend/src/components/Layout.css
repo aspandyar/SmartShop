@@ -104,6 +104,27 @@
   border-left: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.user-profile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  color: white;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.user-profile-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.user-icon {
+  font-size: 1.25rem;
+}
+
 .user-name {
   font-weight: 600;
   font-size: 0.9375rem;

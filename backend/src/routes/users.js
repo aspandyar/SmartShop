@@ -1,12 +1,64 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const {
   listUsers,
   getUser,
   createUserEndpoint,
+  updateOwnProfile,
   updateUserEndpoint,
   deleteUserEndpoint,
-} = require('../controllers/userController');
-const { requireAdmin } = require('../middleware/authMiddleware');
+} = require("../controllers/userController");
+const { requireAuth, requireAdmin } = require("../middleware/authMiddleware");
+
+/**
+ * @swagger
+ * /api/users/profile:
+ *   put:
+ *     summary: Update own profile (Authenticated users)
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 example: johndoe
+ *               email:
+ *                  type: string
+ *                  example: john@example.com
+ *               age:
+ *                 type: number
+ *                 example: 26
+ *               gender:
+ *                 type: string
+ *                 enum: [male, female, other, '']
+ *                 example: male
+ *               preferences:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 example: [electronics, books, sports]
+ *               currentPassword:
+ *                 type: string
+ *                 description: Required if changing password
+ *                 example: password123
+ *               newPassword:
+ *                 type: string
+ *                 description: New password (min 6 characters)
+ *                 example: newpassword123
+ *     responses:
+ *       200:
+ *         description: Profile updated successfully
+ *       401:
+ *         description: Unauthorized or incorrect current password
+ *       400:
+ *         description: Validation error
+ */
+router.put("/profile", requireAuth, updateOwnProfile);
 
 /**
  * @swagger
@@ -19,19 +71,10 @@ const { requireAdmin } = require('../middleware/authMiddleware');
  *     responses:
  *       200:
  *         description: List of users
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 users:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/User'
  *       403:
  *         description: Admin access required
  */
-router.get('/', requireAdmin, listUsers);
+router.get("/", requireAdmin, listUsers);
 
 /**
  * @swagger
@@ -55,7 +98,7 @@ router.get('/', requireAdmin, listUsers);
  *       404:
  *         description: User not found
  */
-router.get('/:id', requireAdmin, getUser);
+router.get("/:id", requireAdmin, getUser);
 
 /**
  * @swagger
@@ -92,7 +135,7 @@ router.get('/:id', requireAdmin, getUser);
  *       201:
  *         description: User created
  */
-router.post('/', createUserEndpoint); // Registration can be public
+router.post("/", createUserEndpoint);
 
 /**
  * @swagger
@@ -136,7 +179,7 @@ router.post('/', createUserEndpoint); // Registration can be public
  *       403:
  *         description: Admin access required
  */
-router.put('/:id', requireAdmin, updateUserEndpoint);
+router.put("/:id", requireAdmin, updateUserEndpoint);
 
 /**
  * @swagger
@@ -164,7 +207,7 @@ router.put('/:id', requireAdmin, updateUserEndpoint);
  *       403:
  *         description: Admin access required
  */
-router.patch('/:id', requireAdmin, updateUserEndpoint);
+router.patch("/:id", requireAdmin, updateUserEndpoint);
 
 /**
  * @swagger
@@ -186,6 +229,6 @@ router.patch('/:id', requireAdmin, updateUserEndpoint);
  *       403:
  *         description: Admin access required
  */
-router.delete('/:id', requireAdmin, deleteUserEndpoint);
+router.delete("/:id", requireAdmin, deleteUserEndpoint);
 
 module.exports = router;
