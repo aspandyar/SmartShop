@@ -1,15 +1,17 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const {
   getRecommendations,
   saveRecommendations,
-} = require('../controllers/recommendationController');
-const { requireAuth } = require('../middleware/authMiddleware');
+  regenerateRecommendations,
+} = require("../controllers/recommendationController");
+const { requireAuth } = require("../middleware/authMiddleware");
 
 /**
  * @swagger
  * /api/recommendations/{userId}:
  *   get:
  *     summary: Get user recommendations (Authenticated users only)
+ *     description: Returns cached recommendations or generates new ones if cache is old
  *     tags: [Recommendations]
  *     security:
  *       - bearerAuth: []
@@ -22,25 +24,40 @@ const { requireAuth } = require('../middleware/authMiddleware');
  *     responses:
  *       200:
  *         description: User recommendations
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 recommendations:
- *                   $ref: '#/components/schemas/Recommendation'
  *       401:
  *         description: Unauthorized
  *       404:
- *         description: No recommendations found
+ *         description: User not found
  */
-router.get('/:userId', requireAuth, getRecommendations);
+router.get("/:userId", requireAuth, getRecommendations);
+
+/**
+ * @swagger
+ * /api/recommendations/{userId}/regenerate:
+ *   post:
+ *     summary: Force regenerate recommendations for a user
+ *     tags: [Recommendations]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Recommendations regenerated
+ *       401:
+ *         description: Unauthorized
+ */
+router.post("/:userId/regenerate", requireAuth, regenerateRecommendations);
 
 /**
  * @swagger
  * /api/recommendations/{userId}:
  *   post:
- *     summary: Save user recommendations (Authenticated users only)
+ *     summary: Manually save recommendations (Admin only)
  *     tags: [Recommendations]
  *     security:
  *       - bearerAuth: []
@@ -66,14 +83,12 @@ router.get('/:userId', requireAuth, getRecommendations);
  *                       type: string
  *                     score:
  *                       type: number
- *                       minimum: 0
- *                       maximum: 1
  *     responses:
  *       201:
  *         description: Recommendations saved
  *       401:
  *         description: Unauthorized
  */
-router.post('/:userId', requireAuth, saveRecommendations);
+router.post("/:userId", requireAuth, saveRecommendations);
 
 module.exports = router;

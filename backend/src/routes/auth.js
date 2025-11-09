@@ -30,11 +30,11 @@ const { requireAuth } = require("../middleware/authMiddleware");
  *               email:
  *                 type: string
  *                 format: email
- *                 example: john@example.com
+ *                 example: admin@smartshop.com
  *               password:
  *                 type: string
  *                 minLength: 6
- *                 example: password123
+ *                 example: admin123
  *               age:
  *                 type: number
  *                 example: 25
@@ -90,10 +90,10 @@ router.post("/register", register);
  *               email:
  *                 type: string
  *                 format: email
- *                 example: john@example.com
+ *                 example: admin@smartshop.com
  *               password:
  *                 type: string
- *                 example: password123
+ *                 example: admin123
  *     responses:
  *       200:
  *         description: Login successful

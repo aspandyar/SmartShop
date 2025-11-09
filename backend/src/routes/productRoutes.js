@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const {
   listProducts,
   searchProductsEndpoint,
@@ -6,8 +6,8 @@ const {
   getProduct,
   updateProductEndpoint,
   deleteProductEndpoint,
-} = require('../controllers/productController');
-const { requireAdmin } = require('../middleware/authMiddleware');
+} = require("../controllers/productController");
+const { requireAdmin, requireAuth } = require("../middleware/authMiddleware");
 
 /**
  * @swagger
@@ -28,7 +28,7 @@ const { requireAdmin } = require('../middleware/authMiddleware');
  *                   items:
  *                     $ref: '#/components/schemas/Product'
  */
-router.get('/', listProducts);
+router.get("/", listProducts);
 
 /**
  * @swagger
@@ -56,7 +56,7 @@ router.get('/', listProducts);
  *                   items:
  *                     $ref: '#/components/schemas/Product'
  */
-router.get('/search', searchProductsEndpoint);
+router.get("/search", searchProductsEndpoint);
 
 /**
  * @swagger
@@ -83,7 +83,7 @@ router.get('/search', searchProductsEndpoint);
  *       404:
  *         description: Product not found
  */
-router.get('/:id', getProduct);
+router.get("/:id", getProduct);
 
 /**
  * @swagger
@@ -125,7 +125,7 @@ router.get('/:id', getProduct);
  *       403:
  *         description: Admin access required
  */
-router.post('/', requireAdmin, createProductEndpoint);
+router.post("/", requireAuth, createProductEndpoint);
 
 /**
  * @swagger
@@ -166,7 +166,7 @@ router.post('/', requireAdmin, createProductEndpoint);
  *       403:
  *         description: Admin access required
  */
-router.put('/:id', requireAdmin, updateProductEndpoint);
+router.put("/:id", requireAdmin, updateProductEndpoint);
 
 /**
  * @swagger
@@ -194,7 +194,7 @@ router.put('/:id', requireAdmin, updateProductEndpoint);
  *       403:
  *         description: Admin access required
  */
-router.patch('/:id', requireAdmin, updateProductEndpoint);
+router.patch("/:id", requireAdmin, updateProductEndpoint);
 
 /**
  * @swagger
@@ -216,6 +216,6 @@ router.patch('/:id', requireAdmin, updateProductEndpoint);
  *       403:
  *         description: Admin access required
  */
-router.delete('/:id', requireAdmin, deleteProductEndpoint);
+router.delete("/:id", requireAdmin, deleteProductEndpoint);
 
 module.exports = router;

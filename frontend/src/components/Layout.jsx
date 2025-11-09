@@ -23,6 +23,8 @@ export function Layout({ children }) {
               <>
                 <Link to="/dashboard">Dashboard</Link>
                 <Link to="/products">Products</Link>
+                <Link to="/recommendations">Recommendations</Link>
+                <Link to="/create-product">Create Product</Link>
                 {isAdmin && (
                   <>
                     <Link to="/admin/products">Manage Products</Link>

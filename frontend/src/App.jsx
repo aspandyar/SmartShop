@@ -7,6 +7,8 @@ import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import ProductsPage from './pages/ProductsPage';
 import ProfilePage from './pages/ProfilePage';
+import RecommendationsPage from './pages/RecommendationsPage';
+import CreateProductPage from './pages/CreateProductPage';
 import AdminProductsPage from './pages/admin/AdminProductsPage';
 import AdminUsersPage from './pages/admin/AdminUsersPage';
 import AdminInteractionTypesPage from './pages/admin/AdminInteractionTypesPage';
@@ -36,6 +38,26 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <ProductsPage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/recommendations"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <RecommendationsPage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/create-product"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <CreateProductPage />
                 </Layout>
               </ProtectedRoute>
             }

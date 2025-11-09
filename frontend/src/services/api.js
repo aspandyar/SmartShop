@@ -75,6 +75,7 @@ export const interactionsAPI = {
 export const recommendationsAPI = {
   get: (userId) => api.get(`/api/recommendations/${userId}`),
   save: (userId, data) => api.post(`/api/recommendations/${userId}`, data),
+  regenerate: (userId) => api.post(`/api/recommendations/${userId}/regenerate`),
 };
 
 // Interaction Types API
