@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../features/auth/AuthContext';
 import { recommendationsAPI, interactionsAPI } from '../services/api';
 import { ProductCard } from '../components/ProductCard';
+import './RecommendationsPage.css';
 
 export function RecommendationsPage() {
   const { user } = useAuth();
@@ -20,7 +21,6 @@ export function RecommendationsPage() {
     try {
       setLoading(true);
       const response = await recommendationsAPI.get(user._id);
-
       if (response.data.recommendations?.recommendations) {
         setRecommendations(response.data.recommendations.recommendations);
       } else {
@@ -60,7 +60,6 @@ export function RecommendationsPage() {
         type,
       });
 
-      // Refresh recommendations after interaction
       if (type === 'like' || type === 'purchase') {
         setTimeout(loadRecommendations, 1000);
       }
@@ -78,13 +77,13 @@ export function RecommendationsPage() {
   }
 
   return (
-    <div className="recommendations-page" style={styles.container}>
-      <div style={styles.header}>
-        <h1 style={styles.title}>Your Personalized Recommendations</h1>
+    <div className="recommendations-container">
+      <div className="recommendations-header">
+        <h1 className="recommendations-title">Your Personalized Recommendations</h1>
         <button
           onClick={handleRegenerateRecommendations}
           disabled={regenerating}
-          style={styles.regenerateButton}
+          className="recommendations-button"
         >
           {regenerating ? '🔄 Regenerating...' : '🔄 Refresh Recommendations'}
         </button>
@@ -93,8 +92,8 @@ export function RecommendationsPage() {
       {error && <div className="error-message">{error}</div>}
 
       {recommendations.length === 0 ? (
-        <div style={styles.emptyState}>
-          <div style={styles.emptyIcon}>🎯</div>
+        <div className="recommendations-empty">
+          <div className="recommendations-empty-icon">🎯</div>
           <h2>No recommendations yet</h2>
           <p>Start interacting with products to get personalized recommendations!</p>
           <p>Browse products, like items, and make purchases to help us understand your preferences.</p>
@@ -124,10 +123,10 @@ export function RecommendationsPage() {
         </div>
       )}
 
-      <div style={styles.infoBox}>
+      <div className="recommendations-info">
         <h3>💡 How recommendations work</h3>
         <p>Our recommendation system uses collaborative filtering to suggest products based on:</p>
-        <ul style={styles.list}>
+        <ul className="recommendations-list">
           <li>Your interaction history (views, likes, purchases)</li>
           <li>Similar users' preferences</li>
           <li>Product categories you're interested in</li>
@@ -137,63 +136,5 @@ export function RecommendationsPage() {
     </div>
   );
 }
-
-const styles = {
-  container: {
-    maxWidth: '1400px',
-    margin: '0 auto',
-    padding: '2rem',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '2rem',
-    flexWrap: 'wrap',
-    gap: '1rem',
-  },
-  title: {
-    margin: 0,
-    fontSize: '2.5rem',
-    background: 'linear-gradient(135deg, #3b82f6, #1e3a8a)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-  },
-  regenerateButton: {
-    padding: '0.75rem 1.5rem',
-    background: 'linear-gradient(135deg, #10b981, #059669)',
-    color: 'white',
-    border: 'none',
-    borderRadius: '0.5rem',
-    fontSize: '1rem',
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'transform 0.2s',
-  },
-  emptyState: {
-    textAlign: 'center',
-    padding: '4rem 2rem',
-    background: 'white',
-    borderRadius: '1rem',
-    border: '2px dashed #e5e7eb',
-    marginBottom: '2rem',
-  },
-  emptyIcon: {
-    fontSize: '4rem',
-    marginBottom: '1rem',
-  },
-  infoBox: {
-    marginTop: '3rem',
-    padding: '1.5rem',
-    background: 'linear-gradient(135deg, #eff6ff, #dbeafe)',
-    borderRadius: '1rem',
-    border: '1px solid #bfdbfe',
-  },
-  list: {
-    textAlign: 'left',
-    marginTop: '1rem',
-    paddingLeft: '1.5rem',
-  },
-};
 
 export default RecommendationsPage;
