@@ -13,11 +13,23 @@ const { requireAdmin, requireAuth } = require("../middleware/authMiddleware");
  * @swagger
  * /api/products:
  *   get:
- *     summary: Get all products
+ *     summary: Get paginated list of products
  *     tags: [Products]
+ *     parameters:
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 10
+ *         description: Number of products to return
+ *       - in: query
+ *         name: cursor
+ *         schema:
+ *           type: string
+ *         description: ID of the last product from the previous batch
  *     responses:
  *       200:
- *         description: List of products
+ *         description: Paginated list of products
  *         content:
  *           application/json:
  *             schema:
@@ -27,6 +39,11 @@ const { requireAdmin, requireAuth } = require("../middleware/authMiddleware");
  *                   type: array
  *                   items:
  *                     $ref: '#/components/schemas/Product'
+ *                 nextCursor:
+ *                   type: string
+ *                   nullable: true
+ *                 hasMore:
+ *                   type: boolean
  */
 router.get("/", listProducts);
 
