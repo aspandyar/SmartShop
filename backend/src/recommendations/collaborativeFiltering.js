@@ -1,4 +1,3 @@
-// backend/src/recommendations/collaborativeFiltering.js
 const { Interaction } = require("../models/Interaction");
 const { Product } = require("../models/productModel");
 const { User } = require("../models/User");
