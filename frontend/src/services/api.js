@@ -45,7 +45,8 @@ export const authAPI = {
 
 // Products API
 export const productsAPI = {
-  getAll: () => api.get("/api/products"),
+  getAll: ({ limit = 10, cursor } = {}) =>
+    api.get("/api/products", { params: { limit, cursor } }),
   getById: (id) => api.get(`/api/products/${id}`),
   search: (query) => api.get("/api/products/search", { params: { q: query } }),
   create: (data) => api.post("/api/products", data),
