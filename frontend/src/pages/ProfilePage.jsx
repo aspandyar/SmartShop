@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useAuth } from '../features/auth/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { usersAPI } from '../services/api';
 import './ProfilePage.css';
 
 export function ProfilePage() {
-  const { user, login } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: user?.username || '',
     age: user?.age || '',
@@ -50,8 +52,11 @@ export function ProfilePage() {
           : [],
       };
 
-      // Add password data if changing password
-      if (showPasswordSection && passwordData.newPassword) {
+      const isChangingPassword = showPasswordSection &&
+                                 passwordData.newPassword &&
+                                 passwordData.newPassword.trim() !== '';
+
+      if (isChangingPassword) {
         if (passwordData.newPassword !== passwordData.confirmPassword) {
           setError('New passwords do not match');
           setLoading(false);
@@ -81,9 +86,6 @@ export function ProfilePage() {
       const updatedUser = response.data.user;
       localStorage.setItem('user', JSON.stringify(updatedUser));
 
-      // Re-login to update context
-      await login(user.email, passwordData.currentPassword || 'skip-password-check');
-
       setSuccess('Profile updated successfully!');
 
       // Reset password fields
@@ -93,6 +95,13 @@ export function ProfilePage() {
         confirmPassword: '',
       });
       setShowPasswordSection(false);
+
+      if (response.data.passwordChanged) {
+        setTimeout(async () => {
+          await logout();
+          navigate('/login');
+        }, 2000);
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to update profile');
     } finally {

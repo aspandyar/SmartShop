@@ -3,6 +3,7 @@ const {
   saveUserRecommendations,
 } = require("../models/Recommendation");
 const { User } = require("../models/User");
+const { Product } = require("../models/productModel");
 const {
   handleMongooseError,
   isValidObjectId,
@@ -12,6 +13,25 @@ const {
 } = require("../recommendations/collaborativeFiltering");
 const logger = require("../utils/logger");
 const { Interaction } = require("../models/Interaction");
+
+async function getRecentProducts(limit = 5, excludeProductIds = []) {
+  try {
+    const products = await Product.find({
+      _id: { $nin: excludeProductIds },
+    })
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .lean();
+
+    return products.map((product) => ({
+      productId: product,
+      score: 0.5, // Low score to indicate these are fallback recommendations
+    }));
+  } catch (error) {
+    logger.error("Error getting recent products:", error);
+    return [];
+  }
+}
 
 async function getRecommendations(req, res, next) {
   try {
@@ -29,7 +49,10 @@ async function getRecommendations(req, res, next) {
     logger.info(`Getting recommendations for user ${userId}`);
 
     // Check user's interaction count
-    const interactionCount = await Interaction.countDocuments({ userId });
+    const userInteractions = await Interaction.find({ userId }).lean();
+    const interactionCount = userInteractions.length;
+    const interactedProductIds = userInteractions.map((i) => i.productId);
+
     logger.info(`User ${userId} has ${interactionCount} interactions`);
 
     let recommendations = await getUserRecommendations(userId);
@@ -43,25 +66,21 @@ async function getRecommendations(req, res, next) {
       logger.info(`Generating new recommendations for user ${userId}`);
 
       try {
-        const newRecommendations = await getHybridRecommendations(userId, 10);
+        let newRecommendations = await getHybridRecommendations(userId, 10);
 
         logger.info(
           `Generated ${newRecommendations.length} recommendations for user ${userId}`
         );
 
         if (newRecommendations.length === 0) {
-          logger.warn(`No recommendations found for user ${userId}`);
-        } else {
-          logger.info(
-            `Sample recommendation scores: ${newRecommendations
-              .slice(0, 3)
-              .map((r) => r.score)
-              .join(", ")}`
+          logger.warn(
+            `No recommendations found for user ${userId}, using recent products fallback`
           );
+          newRecommendations = await getRecentProducts(5, interactedProductIds);
         }
 
         const recommendationsData = newRecommendations.map((rec) => ({
-          productId: rec.productId,
+          productId: rec.productId._id || rec.productId,
           score: rec.score,
         }));
 
@@ -70,22 +89,41 @@ async function getRecommendations(req, res, next) {
           recommendationsData
         );
 
-        logger.info(`Saved recommendations for user ${userId}`);
+        logger.info(
+          `Saved ${recommendationsData.length} recommendations for user ${userId}`
+        );
       } catch (error) {
         logger.error(
           `Failed to generate recommendations for user ${userId}:`,
           error
         );
 
-        return res.json({
-          recommendations: {
+        const fallbackProducts = await getRecentProducts(
+          5,
+          interactedProductIds
+        );
+
+        if (fallbackProducts.length > 0) {
+          const recommendationsData = fallbackProducts.map((rec) => ({
+            productId: rec.productId._id,
+            score: rec.score,
+          }));
+
+          recommendations = await saveUserRecommendations(
             userId,
-            recommendations: [],
-            generatedAt: new Date(),
-            message:
-              "No recommendations available yet. Interact with more products to get personalized recommendations.",
-          },
-        });
+            recommendationsData
+          );
+        } else {
+          return res.json({
+            recommendations: {
+              userId,
+              recommendations: [],
+              generatedAt: new Date(),
+              message:
+                "No recommendations available yet. Interact with more products to get personalized recommendations.",
+            },
+          });
+        }
       }
     } else {
       logger.info(`Using cached recommendations for user ${userId}`);
@@ -174,14 +212,77 @@ async function regenerateRecommendations(req, res, next) {
 
     logger.info(`Force regenerating recommendations for user ${userId}`);
 
-    const newRecommendations = await getHybridRecommendations(userId, 10);
+    // Get user's interacted products to exclude from fallback
+    const userInteractions = await Interaction.find({ userId }).lean();
+    const interactedProductIds = userInteractions.map((i) => i.productId);
 
-    logger.info(`Generated ${newRecommendations.length} recommendations`);
+    let newRecommendations = [];
 
-    const recommendationsData = newRecommendations.map((rec) => ({
-      productId: rec.productId,
-      score: rec.score,
-    }));
+    try {
+      newRecommendations = await getHybridRecommendations(userId, 10);
+      logger.info(`Generated ${newRecommendations.length} recommendations`);
+    } catch (error) {
+      logger.error("Error generating hybrid recommendations:", error);
+    }
+
+    if (newRecommendations.length === 0) {
+      logger.warn(
+        `No recommendations generated, trying popular products fallback`
+      );
+
+      try {
+        newRecommendations = await getPopularProducts(
+          10,
+          new Set(interactedProductIds.map((id) => id.toString()))
+        );
+        logger.info(
+          `Popular products fallback returned ${newRecommendations.length} items`
+        );
+      } catch (error) {
+        logger.error("Popular products fallback failed:", error);
+      }
+    }
+
+    if (newRecommendations.length === 0) {
+      logger.warn(`All fallbacks failed, getting any available products`);
+
+      const anyProducts = await Product.find({}).limit(10).lean();
+
+      newRecommendations = anyProducts.map((product) => ({
+        productId: product,
+        score: 0.1,
+        reason: "default_fallback",
+      }));
+
+      logger.info(
+        `Default fallback returned ${newRecommendations.length} products`
+      );
+    }
+
+    // Ensure we have valid product data
+    const recommendationsData = newRecommendations
+      .filter((rec) => rec.productId && rec.productId._id) // Filter out invalid entries
+      .map((rec) => ({
+        productId: rec.productId._id || rec.productId,
+        score: rec.score || 0,
+      }));
+
+    logger.info(
+      `Saving ${recommendationsData.length} recommendations for user ${userId}`
+    );
+
+    if (recommendationsData.length === 0) {
+      logger.error("No valid recommendations to save!");
+      return res.status(200).json({
+        message: "No recommendations could be generated at this time",
+        recommendations: {
+          userId,
+          recommendations: [],
+          generatedAt: new Date(),
+        },
+        count: 0,
+      });
+    }
 
     const recommendations = await saveUserRecommendations(
       userId,
@@ -191,6 +292,7 @@ async function regenerateRecommendations(req, res, next) {
     res.json({
       message: "Recommendations regenerated successfully",
       recommendations,
+      count: recommendationsData.length,
     });
   } catch (error) {
     logger.error("Error regenerating recommendations:", error);

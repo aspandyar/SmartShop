@@ -138,8 +138,8 @@ async function updateOwnProfile(req, res, next) {
     if (gender !== undefined) updateData.gender = gender;
     if (preferences !== undefined) updateData.preferences = preferences;
 
-    // Handle password change if requested
-    if (newPassword) {
+    let passwordWasChanged = false;
+    if (newPassword && newPassword.trim() !== "") {
       if (!currentPassword) {
         return res.status(400).json({
           message: "Current password is required to set a new password",
@@ -166,6 +166,7 @@ async function updateOwnProfile(req, res, next) {
 
       // Hash new password
       updateData.passwordHash = await hashPassword(newPassword);
+      passwordWasChanged = true;
     }
 
     // Update user
@@ -176,7 +177,12 @@ async function updateOwnProfile(req, res, next) {
 
     const userResponse = { ...user };
     delete userResponse.passwordHash;
-    res.json({ message: "Profile updated successfully", user: userResponse });
+
+    res.json({
+      message: "Profile updated successfully",
+      user: userResponse,
+      passwordChanged: passwordWasChanged,
+    });
   } catch (error) {
     const errorInfo = handleMongooseError(error);
     return res

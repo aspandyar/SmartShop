@@ -21,7 +21,7 @@ export function ProductsPage() {
       const response = await productsAPI.getAll();
       setProducts(response.data.products || []);
     } catch (err) {
-      setError('Failed to load products');
+      setError('Failed to load products', err);
     } finally {
       setLoading(false);
     }
@@ -38,7 +38,7 @@ export function ProductsPage() {
       const response = await productsAPI.search(searchQuery);
       setProducts(response.data.products || []);
     } catch (err) {
-      setError('Failed to search products');
+      setError('Failed to search products', err);
     } finally {
       setLoading(false);
     }
