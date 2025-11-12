@@ -1,26 +1,30 @@
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
 const logger = require('../utils/logger');
 
-let client;
+let connection;
 
 async function connectMongo(uri) {
-  if (client) {
-    return client;
+  if (connection) {
+    return connection;
   }
 
-  client = new MongoClient(uri);
-  await client.connect();
-  logger.info('Connected to MongoDB');
-  return client;
+  connection = await mongoose.connect(uri, {
+    autoIndex: true,
+  });
+
+  logger.info('Connected to MongoDB via Mongoose');
+  return connection;
 }
 
-function getDb(dbName = 'smartshop') {
-  if (!client) {
-    throw new Error('Mongo client not initialized');
+async function disconnectMongo() {
+  if (!connection) {
+    return;
   }
 
-  return client.db(dbName);
+  await mongoose.disconnect();
+  connection = null;
+  logger.info('Disconnected from MongoDB');
 }
 
-module.exports = { connectMongo, getDb };
+module.exports = { connectMongo, disconnectMongo };
 

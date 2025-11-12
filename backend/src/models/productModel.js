@@ -1,31 +1,54 @@
-function createProduct(doc) {
-  return {
-    _id: doc._id,
-    name: doc.name,
-    description: doc.description,
-    price: doc.price,
-    category: doc.category,
-    tags: doc.tags || [],
-    rating: doc.rating || 0,
-    metadata: doc.metadata || {},
-  };
+const mongoose = require("mongoose");
+
+const productSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    description: String,
+    category: String,
+    price: Number,
+    tags: [String],
+  },
+  { timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" } }
+);
+
+productSchema.index({ name: "text", description: "text" });
+
+const Product = mongoose.model("Product", productSchema);
+
+async function getProducts(query = {}) {
+  return Product.find(query).lean();
 }
 
-async function findProducts(db, { searchTerm, category, limit = 20 }) {
-  const query = {};
-
-  if (searchTerm) {
-    query.$text = { $search: searchTerm };
-  }
-
-  if (category) {
-    query.category = category;
-  }
-
-  const cursor = db.collection('products').find(query).limit(limit);
-  const results = await cursor.toArray();
-  return results.map(createProduct);
+async function searchProducts(keyword) {
+  return Product.find({ $text: { $search: keyword } }).lean();
 }
 
-module.exports = { createProduct, findProducts };
+async function createProduct(data) {
+  const product = new Product(data);
+  return product.save();
+}
 
+async function getProductById(id) {
+  return Product.findById(id).lean();
+}
+
+async function updateProduct(id, data) {
+  return Product.findByIdAndUpdate(id, data, {
+    new: true,
+    runValidators: true,
+  }).lean();
+}
+
+async function deleteProduct(id) {
+  return Product.findByIdAndDelete(id).lean();
+}
+
+module.exports = {
+  Product,
+  getProducts,
+  searchProducts,
+  createProduct,
+  getProductById,
+  updateProduct,
+  deleteProduct,
+};
