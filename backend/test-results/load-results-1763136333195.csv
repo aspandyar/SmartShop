@@ -1,0 +1,12 @@
+#,Test Name,Virtual Users,Duration (s),Avg Latency (ms),Min Latency (ms),P95 Latency (ms),Max Latency (ms),Throughput (req/s),Total Requests,Successful Requests,Failed Requests,Error Rate (%),Notes,Timestamp
+"1","Health Check - 50 Users","50","10","92.37","83.00","0.00","365.00","25130.55","276422","274099","2323","0.84","Baseline performance test - low load","2025-11-14T16:03:50.245Z"
+"2","Health Check - 100 Users","100","10","3.23","1.00","0.00","198.00","25865.46","284496","284496","0","0.00","Moderate load test","2025-11-14T16:04:01.253Z"
+"3","Health Check - 500 Users","500","10","18.86","1.00","0.00","4691.00","25833.46","284146","284146","0","0.00","High load stress test","2025-11-14T16:04:12.275Z"
+"4","Product List - 50 Users","50","10","149.23","33.00","0.00","589.00","331.50","3315","3315","0","0.00","Database read operations - low load","2025-11-14T16:04:22.282Z"
+"5","Product List - 100 Users","100","10","289.61","18.00","0.00","3826.00","339.80","3398","3398","0","0.00","Database stress test - moderate load","2025-11-14T16:04:32.296Z"
+"6","Product List - 500 Users","500","10","474.93","22.00","0.00","9859.00","334.80","3348","3011","337","10.07","High load database operations","2025-11-14T16:04:42.319Z"
+"7","Product Search - 50 Users","50","10","152.46","35.00","0.00","1669.00","324.90","3249","3249","0","0.00","Text search performance - low load","2025-11-14T16:04:52.341Z"
+"8","Product Search - 100 Users","100","10","283.13","17.00","0.00","3809.00","347.70","3477","3477","0","0.00","Search under moderate load","2025-11-14T16:05:02.364Z"
+"9","Product Search - 500 Users","500","10","460.98","23.00","0.00","9964.00","345.80","3458","3122","336","9.72","Search under high load","2025-11-14T16:05:12.394Z"
+"10","Product Detail - 50 Users","50","10","6.51","1.00","0.00","130.00","7128.80","71283","71283","0","0.00","Single product fetch - database query by ID","2025-11-14T16:05:23.185Z"
+"11","Product Detail - 100 Users","100","10","13.34","1.00","0.00","304.00","7225.20","72251","72251","0","0.00","Single product fetch - moderate load","2025-11-14T16:05:33.194Z"

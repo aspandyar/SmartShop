@@ -1,0 +1,212 @@
+[
+  {
+    "#": 1,
+    "Test Name": "User Registration (Valid)",
+    "Status": "PASS",
+    "Expected Result": "201 Created with user object and token",
+    "Actual Result": "201 - User created",
+    "Response Time (ms)": "102.00",
+    "Notes": "New user registered successfully",
+    "Timestamp": "2025-11-14T16:03:38.625Z"
+  },
+  {
+    "#": 2,
+    "Test Name": "User Registration (Duplicate)",
+    "Status": "PASS",
+    "Expected Result": "409 Conflict",
+    "Actual Result": "409 - Duplicate rejected",
+    "Response Time (ms)": "4.00",
+    "Notes": "Correctly rejected duplicate email",
+    "Timestamp": "2025-11-14T16:03:38.630Z"
+  },
+  {
+    "#": 3,
+    "Test Name": "User Registration (Invalid Email)",
+    "Status": "PASS",
+    "Expected Result": "400 Bad Request",
+    "Actual Result": "400 - Invalid email rejected",
+    "Response Time (ms)": "1.00",
+    "Notes": "Email format validation working",
+    "Timestamp": "2025-11-14T16:03:38.631Z"
+  },
+  {
+    "#": 4,
+    "Test Name": "User Registration (Short Password)",
+    "Status": "PASS",
+    "Expected Result": "400 Bad Request",
+    "Actual Result": "400 - Short password rejected",
+    "Response Time (ms)": "1.00",
+    "Notes": "Password length validation working",
+    "Timestamp": "2025-11-14T16:03:38.632Z"
+  },
+  {
+    "#": 5,
+    "Test Name": "User Login (Valid)",
+    "Status": "PASS",
+    "Expected Result": "200 OK with token",
+    "Actual Result": "200 - Login successful",
+    "Response Time (ms)": "73.00",
+    "Notes": "JWT token returned",
+    "Timestamp": "2025-11-14T16:03:38.705Z"
+  },
+  {
+    "#": 6,
+    "Test Name": "User Login (Invalid Password)",
+    "Status": "PASS",
+    "Expected Result": "401 Unauthorized",
+    "Actual Result": "401 - Invalid password rejected",
+    "Response Time (ms)": "71.00",
+    "Notes": "Authentication failed as expected",
+    "Timestamp": "2025-11-14T16:03:38.776Z"
+  },
+  {
+    "#": 7,
+    "Test Name": "User Login (Non-existent)",
+    "Status": "PASS",
+    "Expected Result": "401 Unauthorized",
+    "Actual Result": "401 - Non-existent user rejected",
+    "Response Time (ms)": "5.00",
+    "Notes": "User not found",
+    "Timestamp": "2025-11-14T16:03:38.781Z"
+  },
+  {
+    "#": 8,
+    "Test Name": "Get Current User",
+    "Status": "PASS",
+    "Expected Result": "200 OK with user object",
+    "Actual Result": "200 - User data retrieved",
+    "Response Time (ms)": "5.00",
+    "Notes": "Current user information returned",
+    "Timestamp": "2025-11-14T16:03:38.786Z"
+  },
+  {
+    "#": 9,
+    "Test Name": "Update User Profile",
+    "Status": "PASS",
+    "Expected Result": "200 OK with updated user",
+    "Actual Result": "200 - Profile updated",
+    "Response Time (ms)": "8.00",
+    "Notes": "User profile modified successfully",
+    "Timestamp": "2025-11-14T16:03:38.794Z"
+  },
+  {
+    "#": 10,
+    "Test Name": "User Logout",
+    "Status": "PASS",
+    "Expected Result": "200 OK",
+    "Actual Result": "200 - Logout successful",
+    "Response Time (ms)": "4.00",
+    "Notes": "Session destroyed",
+    "Timestamp": "2025-11-14T16:03:38.798Z"
+  },
+  {
+    "#": 11,
+    "Test Name": "Create Product",
+    "Status": "PASS",
+    "Expected Result": "201 Created with product object",
+    "Actual Result": "201 - Product created",
+    "Response Time (ms)": "5.00",
+    "Notes": "New product added to catalog",
+    "Timestamp": "2025-11-14T16:03:38.876Z"
+  },
+  {
+    "#": 12,
+    "Test Name": "List Products",
+    "Status": "PASS",
+    "Expected Result": "200 OK with products array",
+    "Actual Result": "200 - 10 products",
+    "Response Time (ms)": "14.00",
+    "Notes": "Product catalog retrieved",
+    "Timestamp": "2025-11-14T16:03:38.891Z"
+  },
+  {
+    "#": 13,
+    "Test Name": "Search Products",
+    "Status": "PASS",
+    "Expected Result": "200 OK with search results",
+    "Actual Result": "200 - 516 results",
+    "Response Time (ms)": "10.00",
+    "Notes": "Text search working",
+    "Timestamp": "2025-11-14T16:03:38.901Z"
+  },
+  {
+    "#": 14,
+    "Test Name": "Search Products (Empty Query)",
+    "Status": "PASS",
+    "Expected Result": "400 Bad Request",
+    "Actual Result": "400 - Empty query rejected",
+    "Response Time (ms)": "0.00",
+    "Notes": "Query validation working",
+    "Timestamp": "2025-11-14T16:03:38.902Z"
+  },
+  {
+    "#": 15,
+    "Test Name": "Get Product By ID",
+    "Status": "PASS",
+    "Expected Result": "200 OK with product details",
+    "Actual Result": "200 - Product retrieved",
+    "Response Time (ms)": "2.00",
+    "Notes": "Single product fetch working",
+    "Timestamp": "2025-11-14T16:03:38.905Z"
+  },
+  {
+    "#": 16,
+    "Test Name": "Product Pagination",
+    "Status": "PASS",
+    "Expected Result": "200 OK with pagination data",
+    "Actual Result": "200 - 5 products, hasMore: true",
+    "Response Time (ms)": "10.00",
+    "Notes": "Pagination working correctly",
+    "Timestamp": "2025-11-14T16:03:38.915Z"
+  },
+  {
+    "#": 17,
+    "Test Name": "Create View Interaction",
+    "Status": "PASS",
+    "Expected Result": "201 Created with interaction object",
+    "Actual Result": "201 - View logged",
+    "Response Time (ms)": "7.00",
+    "Notes": "User interaction recorded",
+    "Timestamp": "2025-11-14T16:03:38.923Z"
+  },
+  {
+    "#": 18,
+    "Test Name": "Create Like Interaction",
+    "Status": "PASS",
+    "Expected Result": "201 Created",
+    "Actual Result": "201 - Like logged",
+    "Response Time (ms)": "5.00",
+    "Notes": "Like interaction recorded",
+    "Timestamp": "2025-11-14T16:03:38.929Z"
+  },
+  {
+    "#": 19,
+    "Test Name": "Get User Interactions",
+    "Status": "PASS",
+    "Expected Result": "200 OK with interactions array",
+    "Actual Result": "200 - 2 interactions",
+    "Response Time (ms)": "10.00",
+    "Notes": "Interaction history retrieved",
+    "Timestamp": "2025-11-14T16:03:38.939Z"
+  },
+  {
+    "#": 20,
+    "Test Name": "Get Recommendations",
+    "Status": "PASS",
+    "Expected Result": "200 OK with recommendations",
+    "Actual Result": "200 - 4 recommendations",
+    "Response Time (ms)": "30.00",
+    "Notes": "Recommendations generated",
+    "Timestamp": "2025-11-14T16:03:38.969Z"
+  },
+  {
+    "#": 21,
+    "Test Name": "Regenerate Recommendations",
+    "Status": "PASS",
+    "Expected Result": "200 OK with new recommendations",
+    "Actual Result": "200 - Recommendations refreshed",
+    "Response Time (ms)": "20.00",
+    "Notes": "Force regeneration working",
+    "Timestamp": "2025-11-14T16:03:38.989Z"
+  }
+]
