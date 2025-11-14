@@ -1,12 +1,12 @@
-#,Test Name,Virtual Users,Duration (s),Avg Latency (ms),Min Latency (ms),P95 Latency (ms),Max Latency (ms),Throughput (req/s),Total Requests,Successful Requests,Failed Requests,Error Rate (%),Notes,Timestamp
-"1","Health Check - 50 Users","50","10","2.22","2.00","0.00","94.00","18022.80","180215","180215","0","0.00","Baseline performance test - low load","2025-11-14T16:58:26.347Z"
-"2","Health Check - 100 Users","100","10","5.10","1.00","0.00","289.00","18336.73","201705","201705","0","0.00","Moderate load test","2025-11-14T16:58:37.360Z"
-"3","Health Check - 500 Users","500","10","27.35","3.00","0.00","6412.00","17941.10","197359","197359","0","0.00","High load stress test","2025-11-14T16:58:48.393Z"
-"4","Product List - 50 Users","50","10","184.25","39.00","0.00","1179.00","268.00","2680","2680","0","0.00","Database read operations - low load","2025-11-14T16:58:58.402Z"
-"5","Product List - 100 Users","100","10","354.59","94.00","0.00","4150.00","276.80","2768","2768","0","0.00","Database stress test - moderate load","2025-11-14T16:59:08.413Z"
-"6","Product List - 500 Users","500","10","513.97","16.00","0.00","9930.00","276.50","2765","2411","354","12.80","High load database operations","2025-11-14T16:59:18.446Z"
-"7","Product Search - 50 Users","50","10","190.49","22.00","0.00","2076.00","259.30","2593","2593","0","0.00","Text search performance - low load","2025-11-14T16:59:28.464Z"
-"8","Product Search - 100 Users","100","10","340.98","32.00","0.00","4511.00","288.11","2881","2881","0","0.00","Search under moderate load","2025-11-14T16:59:38.488Z"
-"9","Product Search - 500 Users","500","10","511.49","39.00","0.00","9976.00","282.11","2821","2469","352","12.48","Search under high load","2025-11-14T16:59:48.524Z"
-"10","Product Detail - 50 Users","50","10","8.34","2.00","0.00","144.00","5658.80","56580","56580","0","0.00","Single product fetch - database query by ID","2025-11-14T16:59:59.469Z"
-"11","Product Detail - 100 Users","100","10","16.89","3.00","0.00","379.00","5749.60","57494","57494","0","0.00","Single product fetch - moderate load","2025-11-14T17:00:09.479Z"
+#;Test Name;Virtual Users;Duration (s);Avg Latency (ms);Min Latency (ms);P95 Latency (ms);Max Latency (ms);Throughput (req/s);Total Requests;Successful Requests;Failed Requests;Error Rate (%);Notes;Timestamp
+1;Health Check - 50 Users;50;10;2,22;2;0;94;18022,8;180215;180215;0;0;Baseline performance test - low load;14.11.2025 21:58
+2;Health Check - 100 Users;100;10;5,1;1;0;289;18336,73;201705;201705;0;0;Moderate load test;14.11.2025 21:58
+3;Health Check - 500 Users;500;10;27,35;3;0;6412;17941,1;197359;197359;0;0;High load stress test;14.11.2025 21:58
+4;Product List - 50 Users;50;10;184,25;39;0;1179;268;2680;2680;0;0;Database read operations - low load;14.11.2025 21:58
+5;Product List - 100 Users;100;10;354,59;94;0;4150;276,8;2768;2768;0;0;Database stress test - moderate load;14.11.2025 21:59
+6;Product List - 500 Users;500;10;513,97;16;0;9930;276,5;2765;2411;354;12,8;High load database operations;14.11.2025 21:59
+7;Product Search - 50 Users;50;10;190,49;22;0;2076;259,3;2593;2593;0;0;Text search performance - low load;14.11.2025 21:59
+8;Product Search - 100 Users;100;10;340,98;32;0;4511;288,11;2881;2881;0;0;Search under moderate load;14.11.2025 21:59
+9;Product Search - 500 Users;500;10;511,49;39;0;9976;282,11;2821;2469;352;12,48;Search under high load;14.11.2025 21:59
+10;Product Detail - 50 Users;50;10;8,34;2;0;144;5658,8;56580;56580;0;0;Single product fetch - database query by ID;14.11.2025 21:59
+11;Product Detail - 100 Users;100;10;16,89;3;0;379;5749,6;57494;57494;0;0;Single product fetch - moderate load;14.11.2025 22:00
