@@ -26,3 +26,4 @@ async function getUserInteractions(userId) {
 
 module.exports = { Interaction, logInteraction, getUserInteractions };
 
+

@@ -1,0 +1,20 @@
+
+SmartShop/backend on  dev [✘?] is 📦 1.0.0 via ⬢ v25.1.0 on 🐳 v28.3.3 runs 🐙 MR
+➜ npm run test:database
+
+> backend@1.0.0 test:database
+> node tests/database.test.js
+
+[dotenv@17.2.3] injecting env (9) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+[2025-11-14T17:16:42.296Z] [INFO] Connected to MongoDB via Mongoose
+
+════════ Database Integrity Tests ════════
+
+   ✓ Users: 328, Products: 921, Interactions: 15556
+   ✓ Orphaned interactions: 0
+   ✓ Update successful
+   ✓ Delete successful
+
+✓ Database test results saved to: /Users/aspandyar/Projects/SmartShop/backend/test-results/database-results-1763140602583.json
+[2025-11-14T17:16:42.586Z] [INFO] Disconnected from MongoDB
+

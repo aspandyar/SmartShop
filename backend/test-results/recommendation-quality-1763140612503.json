@@ -1,0 +1,26 @@
+[
+  {
+    "#": 1,
+    "Test Name": "Active User Recommendations",
+    "Precision": "0.5000",
+    "Recall": "0.2500",
+    "F1-Score": "0.3333",
+    "Notes": "User with 73 interactions"
+  },
+  {
+    "#": 2,
+    "Test Name": "Cold Start Recommendations",
+    "Precision": "1.0000",
+    "Recall": "1.0000",
+    "F1-Score": "1.0000",
+    "Notes": "New user with no interaction history"
+  },
+  {
+    "#": 3,
+    "Test Name": "Category-based Relevance",
+    "Precision": "0.0000",
+    "Recall": "0.0000",
+    "F1-Score": "0.0000",
+    "Notes": "User preferences: fashion"
+  }
+]

@@ -7,9 +7,14 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "perf:test": "node tests/performanceTests.js",
-    "seed:test": "node scripts/seedTestData.js"
+    "seed:test": "node scripts/seedTestData.js",
+    "test": "mocha tests/functional.test.js --timeout 30000 --reporter spec",
+    "test:load": "node tests/load.test.js",
+    "test:database": "node tests/database.test.js",
+    "test:quality": "node tests/database.test.js quality",
+    "test:all": "npm test && npm run test:load && npm run test:database && npm run test:quality",
+    "test:report": "node tests/generate-report.js"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +36,10 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "mocha": "^10.2.0",
+    "chai": "^4.3.10",
+    "axios": "^1.6.2",
+    "autocannon": "^7.12.0"
   }
 }

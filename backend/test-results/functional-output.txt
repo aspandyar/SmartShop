@@ -1,0 +1,40 @@
+SmartShop/backend on  dev [✘?] is 📦 1.0.0 via ⬢ v25.1.0 on 🐳 v28.3.3 runs 🐙 MR
+➜ npm run test
+
+> backend@1.0.0 test
+> mocha tests/functional.test.js --timeout 30000 --reporter spec
+
+
+
+  SmartShop Functional Tests
+    1. Authentication & User Management
+      ✔ 1.1 Should register a new user with valid data (144ms)
+      ✔ 1.2 Should reject duplicate email registration
+      ✔ 1.3 Should reject invalid email format
+      ✔ 1.4 Should reject short password
+      ✔ 1.5 Should login with valid credentials (94ms)
+      ✔ 1.6 Should reject invalid password (91ms)
+      ✔ 1.7 Should reject non-existent user
+      ✔ 1.8 Should get current authenticated user
+      ✔ 1.9 Should update user profile
+      ✔ 1.10 Should logout user (98ms)
+    2. Product Management
+      ✔ 2.1 Should create a new product
+      ✔ 2.2 Should list all products
+      ✔ 2.3 Should search products
+      ✔ 2.4 Should reject empty search query
+      ✔ 2.5 Should get product by ID
+      ✔ 2.6 Should handle pagination
+    3. User Interactions
+      ✔ 3.1 Should create view interaction
+      ✔ 3.2 Should create like interaction
+      ✔ 3.3 Should get user interactions
+    4. Recommendations
+      ✔ 4.1 Should get user recommendations
+      ✔ 4.2 Should regenerate recommendations
+
+✓ Test results saved to: /Users/aspandyar/Projects/SmartShop/backend/test-results/functional-results-1763141954217.json
+✓ CSV results saved to: /Users/aspandyar/Projects/SmartShop/backend/test-results/functional-results-1763141954217.csv
+
+
+  21 passing (620ms)
