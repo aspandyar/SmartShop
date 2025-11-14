@@ -1,0 +1,108 @@
+
+SmartShop/backend on  dev [✘?] is 📦 1.0.0 via ⬢ v25.1.0 on 🐳 v28.3.3 runs 🐙 MR
+➜ npm run test:quality
+
+> backend@1.0.0 test:quality
+> node tests/database.test.js quality
+
+
+════════ Recommendation Quality Tests ════════
+
+[dotenv@17.2.3] injecting env (9) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+[2025-11-14T17:16:52.325Z] [INFO] Connected to MongoDB via Mongoose
+[2025-11-14T17:16:52.346Z] [INFO] Starting hybrid recommendations for user 69120185cb0db61c33cb19ab
+[2025-11-14T17:16:52.349Z] [INFO] User has 73 interactions
+[2025-11-14T17:16:52.350Z] [INFO] [generateRecommendations] Starting for user 69120185cb0db61c33cb19ab, limit: 7
+[2025-11-14T17:16:52.350Z] [INFO] [getItemBasedRecommendations] Starting for user 69120185cb0db61c33cb19ab, limit: 3
+[2025-11-14T17:16:52.353Z] [INFO] [generateRecommendations] User has interacted with 67 products
+[2025-11-14T17:16:52.354Z] [INFO] [getItemBasedRecommendations] Found 40 like/purchase interactions
+[2025-11-14T17:16:52.355Z] [INFO] [generateRecommendations] User preferences: fashion
+[2025-11-14T17:16:52.355Z] [INFO] [findSimilarUsers] Finding similar users for 69120185cb0db61c33cb19ab
+[2025-11-14T17:16:52.356Z] [INFO] [getItemBasedRecommendations] Retrieved 39 liked products from DB
+[2025-11-14T17:16:52.356Z] [INFO] [getItemBasedRecommendations] Categories: Electronics, Sports, Home, Books, Fashion
+[2025-11-14T17:16:52.356Z] [INFO] [getItemBasedRecommendations] Tags: electronics, tag7, sports, tag3, home, tag6, books, tag0, fashion, tag4, tag1, tag2, tag5, tag8, tag9
+[2025-11-14T17:16:52.357Z] [INFO] [findSimilarUsers] Target user has 73 interactions
+[2025-11-14T17:16:52.357Z] [INFO] [findSimilarUsers] Target user interacted with 73 unique products
+[2025-11-14T17:16:52.368Z] [INFO] [getItemBasedRecommendations] Found 797 similar products
+[2025-11-14T17:16:52.369Z] [INFO] [getItemBasedRecommendations] Returning 3 recommendations
+[2025-11-14T17:16:52.369Z] [INFO] [getItemBasedRecommendations] Top 3: JavaScript Book 38 (5), Backpack 127 (5), Leather Wallet 149 (5)
+[2025-11-14T17:16:52.370Z] [INFO] [findSimilarUsers] Found 102 users with common product interactions
+[2025-11-14T17:16:52.374Z] [INFO] [findSimilarUsers] Calculated 102 users with positive similarity
+[2025-11-14T17:16:52.374Z] [INFO] [findSimilarUsers] Top 3 similar users: 69120185cb0db61c33cb19ab (1.000), 69148f4d44c81a80166a2b70 (0.526), 69120188cb0db61c33cb19ff (0.412)
+[2025-11-14T17:16:52.374Z] [INFO] [generateRecommendations] Found 10 similar users
+[2025-11-14T17:16:52.376Z] [INFO] [generateRecommendations] Similar user 69120185cb0db61c33cb19ab has 73 interactions
+[2025-11-14T17:16:52.383Z] [INFO] [generateRecommendations] Similar user 69148f4d44c81a80166a2b70 has 1318 interactions
+[2025-11-14T17:16:52.386Z] [INFO] [generateRecommendations] Similar user 69120188cb0db61c33cb19ff has 69 interactions
+[2025-11-14T17:16:52.388Z] [INFO] [generateRecommendations] Similar user 6912018bcb0db61c33cb1a57 has 61 interactions
+[2025-11-14T17:16:52.389Z] [INFO] [generateRecommendations] Similar user 69120187cb0db61c33cb19db has 61 interactions
+[2025-11-14T17:16:52.390Z] [INFO] [generateRecommendations] Similar user 69120187cb0db61c33cb19dd has 66 interactions
+[2025-11-14T17:16:52.391Z] [INFO] [generateRecommendations] Similar user 6912018bcb0db61c33cb1a53 has 56 interactions
+[2025-11-14T17:16:52.393Z] [INFO] [generateRecommendations] Similar user 6912018ccb0db61c33cb1a71 has 57 interactions
+[2025-11-14T17:16:52.394Z] [INFO] [generateRecommendations] Similar user 69120186cb0db61c33cb19b3 has 71 interactions
+[2025-11-14T17:16:52.396Z] [INFO] [generateRecommendations] Similar user 69120187cb0db61c33cb19e1 has 73 interactions
+[2025-11-14T17:16:52.396Z] [INFO] [generateRecommendations] Processed 1105 candidate products, skipped 219 already interacted
+[2025-11-14T17:16:52.396Z] [INFO] [generateRecommendations] Found 497 unique candidate products
+[2025-11-14T17:16:52.402Z] [INFO] [generateRecommendations] Retrieved 497 product details from DB
+[2025-11-14T17:16:52.403Z] [INFO] [generateRecommendations] Generated 7 recommendations
+[2025-11-14T17:16:52.403Z] [INFO] [generateRecommendations] Top 3: Product 0 (16.30), Product 9 (14.01), Product 2 (13.14)
+[2025-11-14T17:16:52.403Z] [INFO] Collaborative: 7, Item-based: 3
+[2025-11-14T17:16:52.403Z] [INFO] Final recommendations count: 10
+[2025-11-14T17:16:52.403Z] [INFO] Top 3 scores: 16.30, 14.01, 13.14
+   ✓ Precision: 0.5000
+   ✓ Recall: 0.2500
+   ✓ F1-Score: 0.3333
+[2025-11-14T17:16:52.428Z] [INFO] Starting hybrid recommendations for user 69176404fc16f65e420faf48
+[2025-11-14T17:16:52.430Z] [INFO] User has 0 interactions
+[2025-11-14T17:16:52.430Z] [INFO] User has no interactions, returning popular products
+[2025-11-14T17:16:52.430Z] [INFO] [getPopularProducts] Getting 10 popular products, excluding 0 products
+[2025-11-14T17:16:52.430Z] [INFO] [getPopularProducts] Converted 0 IDs for exclusion
+[2025-11-14T17:16:52.438Z] [INFO] [getPopularProducts] Aggregation returned 10 popular products
+[2025-11-14T17:16:52.439Z] [INFO] [getPopularProducts] Found 10 product details in DB
+[2025-11-14T17:16:52.439Z] [INFO] [getPopularProducts] Returning 10 popular products
+   ✓ Precision: 1.0000
+   ✓ Recall: 1.0000
+   ✓ F1-Score: 1.0000
+[2025-11-14T17:16:52.448Z] [INFO] Starting hybrid recommendations for user 69120185cb0db61c33cb19ab
+[2025-11-14T17:16:52.450Z] [INFO] User has 73 interactions
+[2025-11-14T17:16:52.450Z] [INFO] [generateRecommendations] Starting for user 69120185cb0db61c33cb19ab, limit: 7
+[2025-11-14T17:16:52.450Z] [INFO] [getItemBasedRecommendations] Starting for user 69120185cb0db61c33cb19ab, limit: 3
+[2025-11-14T17:16:52.451Z] [INFO] [getItemBasedRecommendations] Found 40 like/purchase interactions
+[2025-11-14T17:16:52.452Z] [INFO] [generateRecommendations] User has interacted with 67 products
+[2025-11-14T17:16:52.453Z] [INFO] [getItemBasedRecommendations] Retrieved 39 liked products from DB
+[2025-11-14T17:16:52.453Z] [INFO] [getItemBasedRecommendations] Categories: Electronics, Sports, Home, Books, Fashion
+[2025-11-14T17:16:52.453Z] [INFO] [getItemBasedRecommendations] Tags: electronics, tag7, sports, tag3, home, tag6, books, tag0, fashion, tag4, tag1, tag2, tag5, tag8, tag9
+[2025-11-14T17:16:52.453Z] [INFO] [generateRecommendations] User preferences: fashion
+[2025-11-14T17:16:52.453Z] [INFO] [findSimilarUsers] Finding similar users for 69120185cb0db61c33cb19ab
+[2025-11-14T17:16:52.455Z] [INFO] [findSimilarUsers] Target user has 73 interactions
+[2025-11-14T17:16:52.455Z] [INFO] [findSimilarUsers] Target user interacted with 73 unique products
+[2025-11-14T17:16:52.464Z] [INFO] [getItemBasedRecommendations] Found 797 similar products
+[2025-11-14T17:16:52.464Z] [INFO] [getItemBasedRecommendations] Returning 3 recommendations
+[2025-11-14T17:16:52.464Z] [INFO] [getItemBasedRecommendations] Top 3: JavaScript Book 38 (5), Backpack 127 (5), Leather Wallet 149 (5)
+[2025-11-14T17:16:52.467Z] [INFO] [findSimilarUsers] Found 102 users with common product interactions
+[2025-11-14T17:16:52.470Z] [INFO] [findSimilarUsers] Calculated 102 users with positive similarity
+[2025-11-14T17:16:52.470Z] [INFO] [findSimilarUsers] Top 3 similar users: 69120185cb0db61c33cb19ab (1.000), 69148f4d44c81a80166a2b70 (0.526), 69120188cb0db61c33cb19ff (0.412)
+[2025-11-14T17:16:52.470Z] [INFO] [generateRecommendations] Found 10 similar users
+[2025-11-14T17:16:52.472Z] [INFO] [generateRecommendations] Similar user 69120185cb0db61c33cb19ab has 73 interactions
+[2025-11-14T17:16:52.480Z] [INFO] [generateRecommendations] Similar user 69148f4d44c81a80166a2b70 has 1318 interactions
+[2025-11-14T17:16:52.483Z] [INFO] [generateRecommendations] Similar user 69120188cb0db61c33cb19ff has 69 interactions
+[2025-11-14T17:16:52.484Z] [INFO] [generateRecommendations] Similar user 6912018bcb0db61c33cb1a57 has 61 interactions
+[2025-11-14T17:16:52.485Z] [INFO] [generateRecommendations] Similar user 69120187cb0db61c33cb19db has 61 interactions
+[2025-11-14T17:16:52.487Z] [INFO] [generateRecommendations] Similar user 69120187cb0db61c33cb19dd has 66 interactions
+[2025-11-14T17:16:52.488Z] [INFO] [generateRecommendations] Similar user 6912018bcb0db61c33cb1a53 has 56 interactions
+[2025-11-14T17:16:52.489Z] [INFO] [generateRecommendations] Similar user 6912018ccb0db61c33cb1a71 has 57 interactions
+[2025-11-14T17:16:52.490Z] [INFO] [generateRecommendations] Similar user 69120186cb0db61c33cb19b3 has 71 interactions
+[2025-11-14T17:16:52.492Z] [INFO] [generateRecommendations] Similar user 69120187cb0db61c33cb19e1 has 73 interactions
+[2025-11-14T17:16:52.492Z] [INFO] [generateRecommendations] Processed 1105 candidate products, skipped 219 already interacted
+[2025-11-14T17:16:52.492Z] [INFO] [generateRecommendations] Found 497 unique candidate products
+[2025-11-14T17:16:52.500Z] [INFO] [generateRecommendations] Retrieved 497 product details from DB
+[2025-11-14T17:16:52.501Z] [INFO] [generateRecommendations] Generated 7 recommendations
+[2025-11-14T17:16:52.501Z] [INFO] [generateRecommendations] Top 3: Product 0 (16.30), Product 9 (14.01), Product 2 (13.14)
+[2025-11-14T17:16:52.501Z] [INFO] Collaborative: 7, Item-based: 3
+[2025-11-14T17:16:52.501Z] [INFO] Final recommendations count: 10
+[2025-11-14T17:16:52.501Z] [INFO] Top 3 scores: 16.30, 14.01, 13.14
+   ✓ Precision: 0.0000
+   ✓ Recall: 0.0000
+   ✓ F1-Score: 0.0000
+
+✓ Recommendation quality results saved to: /Users/aspandyar/Projects/SmartShop/backend/test-results/recommendation-quality-1763140612503.json
+[2025-11-14T17:16:52.505Z] [INFO] Disconnected from MongoDB

@@ -5,9 +5,9 @@
     "Status": "PASS",
     "Expected Result": "201 Created with user object and token",
     "Actual Result": "201 - User created",
-    "Response Time (ms)": "103.00",
+    "Response Time (ms)": "135.00",
     "Notes": "New user registered successfully",
-    "Timestamp": "2025-11-14T16:01:19.011Z"
+    "Timestamp": "2025-11-14T16:55:56.506Z"
   },
   {
     "#": 2,
@@ -15,9 +15,9 @@
     "Status": "PASS",
     "Expected Result": "409 Conflict",
     "Actual Result": "409 - Duplicate rejected",
-    "Response Time (ms)": "4.00",
+    "Response Time (ms)": "5.00",
     "Notes": "Correctly rejected duplicate email",
-    "Timestamp": "2025-11-14T16:01:19.016Z"
+    "Timestamp": "2025-11-14T16:55:56.513Z"
   },
   {
     "#": 3,
@@ -27,7 +27,7 @@
     "Actual Result": "400 - Invalid email rejected",
     "Response Time (ms)": "2.00",
     "Notes": "Email format validation working",
-    "Timestamp": "2025-11-14T16:01:19.018Z"
+    "Timestamp": "2025-11-14T16:55:56.515Z"
   },
   {
     "#": 4,
@@ -37,7 +37,7 @@
     "Actual Result": "400 - Short password rejected",
     "Response Time (ms)": "1.00",
     "Notes": "Password length validation working",
-    "Timestamp": "2025-11-14T16:01:19.019Z"
+    "Timestamp": "2025-11-14T16:55:56.516Z"
   },
   {
     "#": 5,
@@ -45,9 +45,9 @@
     "Status": "PASS",
     "Expected Result": "200 OK with token",
     "Actual Result": "200 - Login successful",
-    "Response Time (ms)": "74.00",
+    "Response Time (ms)": "93.00",
     "Notes": "JWT token returned",
-    "Timestamp": "2025-11-14T16:01:19.093Z"
+    "Timestamp": "2025-11-14T16:55:56.610Z"
   },
   {
     "#": 6,
@@ -55,9 +55,9 @@
     "Status": "PASS",
     "Expected Result": "401 Unauthorized",
     "Actual Result": "401 - Invalid password rejected",
-    "Response Time (ms)": "71.00",
+    "Response Time (ms)": "91.00",
     "Notes": "Authentication failed as expected",
-    "Timestamp": "2025-11-14T16:01:19.164Z"
+    "Timestamp": "2025-11-14T16:55:56.701Z"
   },
   {
     "#": 7,
@@ -67,7 +67,7 @@
     "Actual Result": "401 - Non-existent user rejected",
     "Response Time (ms)": "3.00",
     "Notes": "User not found",
-    "Timestamp": "2025-11-14T16:01:19.168Z"
+    "Timestamp": "2025-11-14T16:55:56.705Z"
   },
   {
     "#": 8,
@@ -75,9 +75,9 @@
     "Status": "PASS",
     "Expected Result": "200 OK with user object",
     "Actual Result": "200 - User data retrieved",
-    "Response Time (ms)": "6.00",
+    "Response Time (ms)": "5.00",
     "Notes": "Current user information returned",
-    "Timestamp": "2025-11-14T16:01:19.174Z"
+    "Timestamp": "2025-11-14T16:55:56.710Z"
   },
   {
     "#": 9,
@@ -85,9 +85,9 @@
     "Status": "PASS",
     "Expected Result": "200 OK with updated user",
     "Actual Result": "200 - Profile updated",
-    "Response Time (ms)": "6.00",
+    "Response Time (ms)": "10.00",
     "Notes": "User profile modified successfully",
-    "Timestamp": "2025-11-14T16:01:19.180Z"
+    "Timestamp": "2025-11-14T16:55:56.720Z"
   },
   {
     "#": 10,
@@ -95,9 +95,9 @@
     "Status": "PASS",
     "Expected Result": "200 OK",
     "Actual Result": "200 - Logout successful",
-    "Response Time (ms)": "4.00",
+    "Response Time (ms)": "3.00",
     "Notes": "Session destroyed",
-    "Timestamp": "2025-11-14T16:01:19.184Z"
+    "Timestamp": "2025-11-14T16:55:56.723Z"
   },
   {
     "#": 11,
@@ -107,7 +107,7 @@
     "Actual Result": "201 - Product created",
     "Response Time (ms)": "6.00",
     "Notes": "New product added to catalog",
-    "Timestamp": "2025-11-14T16:01:19.263Z"
+    "Timestamp": "2025-11-14T16:55:56.822Z"
   },
   {
     "#": 12,
@@ -115,19 +115,19 @@
     "Status": "PASS",
     "Expected Result": "200 OK with products array",
     "Actual Result": "200 - 10 products",
-    "Response Time (ms)": "9.00",
+    "Response Time (ms)": "14.00",
     "Notes": "Product catalog retrieved",
-    "Timestamp": "2025-11-14T16:01:19.273Z"
+    "Timestamp": "2025-11-14T16:55:56.836Z"
   },
   {
     "#": 13,
     "Test Name": "Search Products",
     "Status": "PASS",
     "Expected Result": "200 OK with search results",
-    "Actual Result": "200 - 515 results",
-    "Response Time (ms)": "9.00",
+    "Actual Result": "200 - 521 results",
+    "Response Time (ms)": "13.00",
     "Notes": "Text search working",
-    "Timestamp": "2025-11-14T16:01:19.283Z"
+    "Timestamp": "2025-11-14T16:55:56.850Z"
   },
   {
     "#": 14,
@@ -135,9 +135,9 @@
     "Status": "PASS",
     "Expected Result": "400 Bad Request",
     "Actual Result": "400 - Empty query rejected",
-    "Response Time (ms)": "2.00",
+    "Response Time (ms)": "1.00",
     "Notes": "Query validation working",
-    "Timestamp": "2025-11-14T16:01:19.285Z"
+    "Timestamp": "2025-11-14T16:55:56.852Z"
   },
   {
     "#": 15,
@@ -145,9 +145,9 @@
     "Status": "PASS",
     "Expected Result": "200 OK with product details",
     "Actual Result": "200 - Product retrieved",
-    "Response Time (ms)": "9.00",
+    "Response Time (ms)": "3.00",
     "Notes": "Single product fetch working",
-    "Timestamp": "2025-11-14T16:01:19.295Z"
+    "Timestamp": "2025-11-14T16:55:56.855Z"
   },
   {
     "#": 16,
@@ -155,9 +155,9 @@
     "Status": "PASS",
     "Expected Result": "200 OK with pagination data",
     "Actual Result": "200 - 5 products, hasMore: true",
-    "Response Time (ms)": "11.00",
+    "Response Time (ms)": "18.00",
     "Notes": "Pagination working correctly",
-    "Timestamp": "2025-11-14T16:01:19.306Z"
+    "Timestamp": "2025-11-14T16:55:56.873Z"
   },
   {
     "#": 17,
@@ -165,9 +165,9 @@
     "Status": "PASS",
     "Expected Result": "201 Created with interaction object",
     "Actual Result": "201 - View logged",
-    "Response Time (ms)": "6.00",
+    "Response Time (ms)": "8.00",
     "Notes": "User interaction recorded",
-    "Timestamp": "2025-11-14T16:01:19.313Z"
+    "Timestamp": "2025-11-14T16:55:56.885Z"
   },
   {
     "#": 18,
@@ -175,9 +175,9 @@
     "Status": "PASS",
     "Expected Result": "201 Created",
     "Actual Result": "201 - Like logged",
-    "Response Time (ms)": "5.00",
+    "Response Time (ms)": "7.00",
     "Notes": "Like interaction recorded",
-    "Timestamp": "2025-11-14T16:01:19.318Z"
+    "Timestamp": "2025-11-14T16:55:56.893Z"
   },
   {
     "#": 19,
@@ -185,9 +185,9 @@
     "Status": "PASS",
     "Expected Result": "200 OK with interactions array",
     "Actual Result": "200 - 2 interactions",
-    "Response Time (ms)": "6.00",
+    "Response Time (ms)": "10.00",
     "Notes": "Interaction history retrieved",
-    "Timestamp": "2025-11-14T16:01:19.325Z"
+    "Timestamp": "2025-11-14T16:55:56.903Z"
   },
   {
     "#": 20,
@@ -195,9 +195,9 @@
     "Status": "PASS",
     "Expected Result": "200 OK with recommendations",
     "Actual Result": "200 - 4 recommendations",
-    "Response Time (ms)": "31.00",
+    "Response Time (ms)": "35.00",
     "Notes": "Recommendations generated",
-    "Timestamp": "2025-11-14T16:01:19.356Z"
+    "Timestamp": "2025-11-14T16:55:56.938Z"
   },
   {
     "#": 21,
@@ -205,8 +205,8 @@
     "Status": "PASS",
     "Expected Result": "200 OK with new recommendations",
     "Actual Result": "200 - Recommendations refreshed",
-    "Response Time (ms)": "20.00",
+    "Response Time (ms)": "24.00",
     "Notes": "Force regeneration working",
-    "Timestamp": "2025-11-14T16:01:19.376Z"
+    "Timestamp": "2025-11-14T16:55:56.962Z"
   }
 ]
